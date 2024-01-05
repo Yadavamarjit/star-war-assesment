@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import "./CharacterCard.css";
 import {
@@ -8,13 +8,22 @@ import {
   Man,
   Woman,
 } from "@mui/icons-material";
+import { toggleFavorite } from "../../redux/reducers/characterReducer";
+import { useDispatch } from "react-redux";
+import { getIdFromUrl } from "../../utils/genralUtils";
 export default function CharacterCard({
   name,
   height,
   mass,
   gender,
   favorite,
+  url,
 }) {
+  const dispatch = useDispatch();
+  const handleToggleFavorite = () => {
+    dispatch(toggleFavorite({ characterId: getIdFromUrl(url) }));
+  };
+
   return (
     <Grid className={`character-card-container ${gender}`} container>
       <Grid item xs="4">
@@ -34,10 +43,12 @@ export default function CharacterCard({
         </Typography>
       </Grid>
       <Grid item xs="2" className="card-content">
-        <Box>{favorite ? <Favorite /> : <FavoriteBorder />}</Box>
-        <Box>
-          <ArrowForwardIos />
+        <Box className="like-btn-container" onClick={handleToggleFavorite}>
+          {" "}
+          {favorite ? <Favorite className="favorite" /> : <FavoriteBorder />}
         </Box>
+
+        <ArrowForwardIos />
       </Grid>
       <Grid className="bar" container></Grid>
     </Grid>

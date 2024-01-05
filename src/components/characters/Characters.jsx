@@ -10,7 +10,7 @@ export default function Characters() {
   const { characters, loading, error, page, hasMore } = useSelector(
     (state) => state.characters
   );
-
+  console.log(characters);
   const loadCharacters = () => {
     dispatch(fetchCharacters(page + 1));
   };

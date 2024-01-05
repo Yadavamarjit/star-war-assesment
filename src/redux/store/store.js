@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import characterReducer from "../reducers/characterReducer";
+import characterReducer, {
+  persistedCharacterReducer,
+} from "../reducers/characterReducer";
+import persistStore from "redux-persist/es/persistStore";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    characters: characterReducer,
+    characters: persistedCharacterReducer,
   },
 });
 
-export default store;
+export const persistor = persistStore(store);

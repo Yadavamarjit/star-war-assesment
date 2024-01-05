@@ -48,3 +48,13 @@
 .card-content p {
   font-size: 1.5rem;
 }
+
+.like-btn-container {
+  cursor: pointer;
+}
+.like-btn-container .favorite {
+  color: #ed4956;
+}
+.like-btn-container svg {
+  color: #9f9999;
+}
