@@ -1,4 +1,25 @@
 .character-card-container {
-  border: 1px solid gray;
   width: 300px !important;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #f3fbfaff;
+  height: 100px;
+}
+
+.character-card-container.male {
+  background-color: #f4f2fcff;
+}
+.character-card-container.male .bar {
+  background-color: #7d6ce2ff;
+}
+.character-card-container.female {
+  background-color: #fff0f4ff;
+}
+.character-card-container.female .bar {
+  background-color: #ff81a9ff;
+}
+.character-card-container .na {
+}
+.bar {
+  background-color: #ffc466ff;
 }

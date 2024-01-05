@@ -3,24 +3,34 @@ import { useSelector, useDispatch } from "react-redux";
 import CharacterCard from "../cards/CharacterCard";
 import { fetchCharacters } from "../../redux/actions/characterAction";
 import "./Characters.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Characters() {
   const dispatch = useDispatch();
-  const characters = useSelector((state) => state.characters.characters);
-  const loading = useSelector((state) => state.characters.loading);
-  const error = useSelector((state) => state.characters.error);
+  const { characters, loading, error, page, hasMore } = useSelector(
+    (state) => state.characters
+  );
 
   const loadCharacters = () => {
-    dispatch(fetchCharacters(1));
+    dispatch(fetchCharacters(page + 1));
   };
+
   useEffect(() => {
     loadCharacters();
   }, []);
   return (
-    <div className="characters-container">
-      {characters.map((character, i) => (
-        <CharacterCard {...character} key={i} />
-      ))}
-    </div>
+    <InfiniteScroll
+      dataLength={characters.length}
+      next={loadCharacters}
+      hasMore={hasMore}
+      loader={<h4>Loading ... </h4>}
+    >
+      {" "}
+      <div className="characters-container">
+        {characters.map((character, i) => (
+          <CharacterCard {...character} key={i} />
+        ))}
+      </div>
+    </InfiniteScroll>
   );
 }

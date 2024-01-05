@@ -7,7 +7,7 @@ export const fetchCharacters = createAsyncThunk(
   async (page) => {
     try {
       const response = await fetch("get", `/people/?page=${page}`);
-      return response.results;
+      return response;
     } catch (error) {
       throw Error(error.message);
     }

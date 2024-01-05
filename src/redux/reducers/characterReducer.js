@@ -5,6 +5,8 @@ const initialState = {
   characters: [],
   loading: false,
   error: null,
+  page: 0,
+  hasMore: false,
 };
 
 const characterSlice = createSlice({
@@ -19,7 +21,9 @@ const characterSlice = createSlice({
       })
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         state.loading = false;
-        state.characters = [...state.characters, ...action.payload];
+        state.characters = [...state.characters, ...action.payload.results];
+        state.page = state.page + 1;
+        state.hasMore = action.payload.next;
       })
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.loading = false;
