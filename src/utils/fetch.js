@@ -8,7 +8,7 @@ export const fetch = async (
   params = {},
   baseUrl
 ) => {
-  const url = baseUrl ?? "https://swapi.dev";
+  const url = baseUrl ?? "https://swapi.dev/api";
   try {
     const config = {
       method: req,
