@@ -1,9 +1,10 @@
 .character-card-container {
-  width: 300px !important;
+  width: 400px !important;
   overflow: hidden;
   border-radius: 5px;
   background-color: #f3fbfaff;
-  height: 100px;
+  min-height: 150px;
+  position: relative;
 }
 
 .character-card-container.male {
@@ -18,8 +19,32 @@
 .character-card-container.female .bar {
   background-color: #ff81a9ff;
 }
-.character-card-container .na {
-}
 .bar {
-  background-color: #ffc466ff;
+  background-color: #6ecfbdff;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  bottom: 0;
+}
+
+.gender-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.gender-container svg {
+  font-size: 60px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column !important;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.card-content p {
+  font-size: 1.5rem;
 }
