@@ -53,7 +53,6 @@ export const getFilteredCharacters = (characters, selectedFilters) => {
   }
 
   if (selectedFilters["sort"]) {
-    console.log("key", selectedFilters["sort"]);
     const sortDirection = selectedFilters["sort"];
     if (sortDirection === "ascending") {
       filteredCharacters.sort((a, b) => a.name.localeCompare(b.name));

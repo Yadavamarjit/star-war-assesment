@@ -14,12 +14,25 @@ import "./Filters.css";
 import { filterCharacters } from "../../redux/reducers/characterReducer";
 
 export default function Filters() {
-  const { filters, loading, page } = useSelector((state) => state.characters);
+  const { filters, loading, page, selectedFilters } = useSelector(
+    (state) => state.characters
+  );
   const dispatch = useDispatch();
   const handleFilterChanged = (payload) => {
     dispatch(filterCharacters(payload));
   };
-  console.log(!loading && page > 0, { loading, page });
+
+  const isOptionChecked = (key, option) => {
+    if (selectedFilters[key]) {
+      if (key == "sort") {
+        return selectedFilters[key] === option;
+      }
+      const indx = selectedFilters[key].findIndex((opt) => opt === option);
+      if (indx > -1) {
+        return true;
+      }
+    }
+  };
 
   return (
     <Grid className="filters-container">
@@ -40,6 +53,8 @@ export default function Filters() {
                       },
                     }}
                     onChange={() => handleFilterChanged({ key, option })}
+                    value={option}
+                    checked={isOptionChecked(key, option)} // Set checked based on selectedFilters
                   />
                   <Typography variant="caption">
                     {option.toLocaleUpperCase()}
@@ -65,6 +80,7 @@ export default function Filters() {
           value="ascending"
           control={
             <Radio
+              checked={isOptionChecked("sort", "ascending")}
               sx={{
                 color: pink[800],
                 "&.Mui-checked": {
@@ -79,6 +95,7 @@ export default function Filters() {
           value="descending"
           control={
             <Radio
+              checked={isOptionChecked("sort", "descending")}
               sx={{
                 color: pink[800],
                 "&.Mui-checked": {

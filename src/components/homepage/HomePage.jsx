@@ -13,7 +13,7 @@ export default function HomePage() {
     <>
       <Navbar />
       <Grid className="mobile-search-bar">
-        <Search />
+        <Search className="sdf" />
       </Grid>
       <Grid container className="homepage-container">
         {/* preventing reloading of filters when charaacters are being fetched */}

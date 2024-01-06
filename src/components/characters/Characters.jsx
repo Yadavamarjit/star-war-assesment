@@ -44,13 +44,16 @@ export default function Characters() {
           dataLength={characters.length}
           next={loadCharacters}
           hasMore={hasMore}
-          loader={<center>Fetching more characters ... </center>}
+          loader={loading ? <center>Fetching more characters ... </center> : ""}
         >
           {" "}
           <div className="characters-container">
             {characters.map((character, i) => (
               <CharacterCard {...character} key={i} />
             ))}
+            {!loading && characters.length == 0 && (
+              <h3 className="no-characters">No Character Found</h3>
+            )}
           </div>
         </InfiniteScroll>
       )}

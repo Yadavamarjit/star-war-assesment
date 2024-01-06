@@ -47,7 +47,6 @@ const characterSlice = createSlice({
     filterCharacters: (state, action) => {
       const { selectedFilters } = state;
       const { key, option } = action.payload;
-      console.log({ key, option });
       if (selectedFilters[key]) {
         if (key !== "name" && key !== "sort" && key !== "favorite") {
           const index = selectedFilters[key].findIndex(

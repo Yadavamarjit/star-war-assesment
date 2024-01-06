@@ -23,6 +23,7 @@
   color: white !important;
   font-weight: 400;
   width: 140px;
+  text-decoration: underline !important;
 }
 
 .fav-button svg {

@@ -9,8 +9,18 @@
   height: 100%;
 }
 
+.no-characters {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(10px, 10px);
+}
+
 @media (max-width: 768px) {
   .characters-container {
     justify-content: center;
+  }
+  .no-characters {
+    transform: translate(-50%, -50%);
   }
 }
