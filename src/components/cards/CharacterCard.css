@@ -58,3 +58,7 @@
 .like-btn-container svg {
   color: #9f9999;
 }
+.arrow-forward {
+  cursor: pointer;
+  margin-bottom: 5px;
+}

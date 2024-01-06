@@ -6,10 +6,15 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { filterCharacters } from "../../redux/reducers/characterReducer";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const { selectedFilters } = useSelector((state) => state.characters);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleviewFavorite = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
     dispatch(
       filterCharacters({
         key: "favorite",

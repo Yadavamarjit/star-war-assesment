@@ -10,7 +10,8 @@ import {
 } from "@mui/icons-material";
 import { toggleFavorite } from "../../redux/reducers/characterReducer";
 import { useDispatch } from "react-redux";
-import { getIdFromUrl } from "../../utils/genralUtils";
+import { getIdFromUrl } from "../../utils/characterUtils";
+import { useNavigate } from "react-router-dom";
 export default function CharacterCard({
   name,
   height,
@@ -20,12 +21,21 @@ export default function CharacterCard({
   url,
 }) {
   const dispatch = useDispatch();
-  const handleToggleFavorite = () => {
-    dispatch(toggleFavorite({ characterId: getIdFromUrl(url) }));
+  const navigate = useNavigate();
+  const characterId = getIdFromUrl(url);
+  const handleToggleFavorite = (e) => {
+    e.stopPropagation();
+    dispatch(toggleFavorite({ characterId }));
   };
-
+  const handleNavigate = () => {
+    navigate("/people/" + characterId);
+  };
   return (
-    <Grid className={`character-card-container ${gender}`} container>
+    <Grid
+      className={`character-card-container ${gender}`}
+      onClick={handleNavigate}
+      container
+    >
       <Grid item xs={4}>
         <Grid className="gender-container">
           {gender == "male" ? <Man /> : gender == "n/a" ? "N/A" : <Woman />}
@@ -48,7 +58,7 @@ export default function CharacterCard({
           {favorite ? <Favorite className="favorite" /> : <FavoriteBorder />}
         </Box>
 
-        <ArrowForwardIos />
+        <ArrowForwardIos className="arrow-forward" />
       </Grid>
       <Grid className="bar" container></Grid>
     </Grid>

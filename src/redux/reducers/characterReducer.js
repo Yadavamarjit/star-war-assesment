@@ -6,7 +6,7 @@ import {
   getFilteredCharacters,
   getIdFromUrl,
   getOptionsAndFavorites,
-} from "../../utils/genralUtils";
+} from "../../utils/characterUtils";
 
 const initialState = {
   characters: [],

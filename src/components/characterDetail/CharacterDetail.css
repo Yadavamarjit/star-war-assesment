@@ -1,0 +1,21 @@
+.character-details {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.character-details h2 {
+  margin-bottom: 16px;
+}
+
+.character-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.character-details li {
+  margin-bottom: 8px;
+}
+
+.films-details {
+  margin-top: 10px;
+}

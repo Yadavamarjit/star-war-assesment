@@ -9,8 +9,6 @@ import {
 import { pink } from "@mui/material/colors";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import acending from "../../assets/acending.svg";
-import decending from "../../assets/decending.svg";
 
 import "./Filters.css";
 import { filterCharacters } from "../../redux/reducers/characterReducer";
