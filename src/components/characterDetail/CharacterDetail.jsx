@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, Grid, Paper } from "@mui/material";
 import { fetchFilmData, findCharacter } from "../../utils/characterDetail";
-import "./CharacterDetail.css"; // Import the CSS file
+import "./CharacterDetail.css";
 import Navbar from "../navbar/Navbar";
-import Loader from "../Loader/Loader";
+import Loader from "../loader/Loader";
 
 export default function CharacterDetail() {
   const [character, setCharacter] = useState({});
