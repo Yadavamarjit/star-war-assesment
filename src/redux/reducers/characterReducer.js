@@ -3,8 +3,9 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { fetchCharacters } from "../actions/characterAction";
 import {
+  getFilteredCharacters,
   getIdFromUrl,
-  setFavoritePropertyForFetchedCharacters,
+  getOptionsAndFavorites,
 } from "../../utils/genralUtils";
 
 const initialState = {
@@ -14,6 +15,9 @@ const initialState = {
   page: 0,
   hasMore: false,
   favorite: {},
+  filters: {},
+  selectedFilters: {},
+  filteredCharacters: [],
 };
 
 const characterSlice = createSlice({
@@ -31,10 +35,37 @@ const characterSlice = createSlice({
       state.characters = updatedCharacters;
 
       if (state.favorite[characterId]) {
-        delete state.favorite[id];
+        delete state.favorite[characterId];
       } else {
         state.favorite[characterId] = true;
       }
+      state.filteredCharacters = getFilteredCharacters(
+        state.characters,
+        state.selectedFilters
+      );
+    },
+    filterCharacters: (state, action) => {
+      const { selectedFilters } = state;
+      const { key, option } = action.payload;
+
+      if (selectedFilters[key]) {
+        const index = selectedFilters[key].findIndex(
+          (filter) => filter === option
+        );
+        if (index > -1) {
+          selectedFilters[key] = selectedFilters[key].filter(
+            (filter) => filter !== option
+          );
+        } else {
+          selectedFilters[key].push(option);
+        }
+      } else {
+        selectedFilters[key] = [option];
+      }
+      state.filteredCharacters = getFilteredCharacters(
+        state.characters,
+        selectedFilters
+      );
     },
   },
   extraReducers: (builder) => {
@@ -46,15 +77,20 @@ const characterSlice = createSlice({
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         const fetchedCharacters = action.payload.results;
 
-        setFavoritePropertyForFetchedCharacters(
-          state.favorite,
-          fetchedCharacters
-        );
+        // generating options for filter and and retirving favorite characters
+        getOptionsAndFavorites(state, fetchedCharacters);
 
         state.loading = false;
         state.characters = [...state.characters, ...fetchedCharacters];
         state.page = state.page + 1;
         state.hasMore = action.payload.next;
+
+        // filttering characters when page is changed
+
+        state.filteredCharacters = getFilteredCharacters(
+          state.characters,
+          state.selectedFilters
+        );
       })
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.loading = false;
@@ -74,5 +110,5 @@ export const persistedCharacterReducer = persistReducer(
   characterSlice.reducer
 );
 
-export const { toggleFavorite } = characterSlice.actions;
+export const { toggleFavorite, filterCharacters } = characterSlice.actions;
 export default characterSlice.reducer;

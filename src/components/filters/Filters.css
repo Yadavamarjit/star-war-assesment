@@ -1,0 +1,13 @@
+.filters-container {
+  background-color: #0e0e42;
+  color: white;
+  padding: 20px;
+}
+.checkbox-container input {
+  color: white;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
