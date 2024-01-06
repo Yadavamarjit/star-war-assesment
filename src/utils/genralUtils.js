@@ -30,7 +30,11 @@ export const getFilteredCharacters = (characters, selectedFilters) => {
   let filteredCharacters = characters.filter((character) => {
     return Object.entries(selectedFilters).every(
       ([filterKey, filterValues]) => {
-        if (filterKey !== "name" && filterKey !== "sort") {
+        if (
+          filterKey !== "name" &&
+          filterKey !== "sort" &&
+          filterKey !== "favorite"
+        ) {
           return (
             filterValues.length === 0 ||
             filterValues.includes(character[filterKey])
@@ -56,6 +60,13 @@ export const getFilteredCharacters = (characters, selectedFilters) => {
     } else if (sortDirection === "descending") {
       filteredCharacters.sort((a, b) => b.name.localeCompare(a.name));
     }
+  }
+
+  if (selectedFilters["favorite"]) {
+    const isFavorite = selectedFilters["favorite"];
+    filteredCharacters = filteredCharacters.filter(
+      (character) => character.favorite === isFavorite
+    );
   }
 
   return filteredCharacters;

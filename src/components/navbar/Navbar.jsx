@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "../search/Search";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
-import { FavoriteBorder } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Box, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { filterCharacters } from "../../redux/reducers/characterReducer";
 export default function Navbar() {
+  const { selectedFilters } = useSelector((state) => state.characters);
+  const dispatch = useDispatch();
+  const handleviewFavorite = () => {
+    dispatch(
+      filterCharacters({
+        key: "favorite",
+        option: selectedFilters["favorite"] ? false : true,
+      })
+    );
+  };
+
   return (
     <Box className="navbar-container">
       <Box>
@@ -13,9 +26,20 @@ export default function Navbar() {
 
       <Search />
 
-      <Box className="favorites">
-        <FavoriteBorder />
-      </Box>
+      {/* <Box className="favorites"> */}
+      <Button
+        className="fav-button"
+        variant="text"
+        onClick={handleviewFavorite}
+      >
+        {selectedFilters["favorite"] ? (
+          <>View All</>
+        ) : (
+          <>
+            View <Favorite />
+          </>
+        )}
+      </Button>
     </Box>
   );
 }

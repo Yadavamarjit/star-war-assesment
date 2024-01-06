@@ -49,7 +49,7 @@ const characterSlice = createSlice({
       const { key, option } = action.payload;
       console.log({ key, option });
       if (selectedFilters[key]) {
-        if (key !== "name" && key !== "sort") {
+        if (key !== "name" && key !== "sort" && key !== "favorite") {
           const index = selectedFilters[key].findIndex(
             (filter) => filter === option
           );
@@ -61,13 +61,18 @@ const characterSlice = createSlice({
           } else {
             selectedFilters[key].push(option);
           }
-        } else if (key == "name" || key == "sort") {
+        } else if (key == "name" || key == "sort" || key == "favorite") {
           selectedFilters[key] = option;
-          if (selectedFilters[key].length == 0) delete selectedFilters[key];
+
+          if (
+            key == "favorite" &&
+            (option === false || selectedFilters[key]?.length) == 0
+          )
+            delete selectedFilters[key];
         }
       } else {
-        if (key == "name" || key == "sort") {
-          option.length && (selectedFilters[key] = option);
+        if (key == "name" || key == "sort" || key == "favorite") {
+          (option?.length || option) && (selectedFilters[key] = option);
         } else selectedFilters[key] = [option];
       }
       state.filteredCharacters = getFilteredCharacters(

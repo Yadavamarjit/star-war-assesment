@@ -12,3 +12,11 @@
 .navbar-container :nth-child(1) {
   height: 70%;
 }
+
+.fav-button {
+  color: white;
+}
+
+.fav-button svg {
+  color: #ed4956;
+}
