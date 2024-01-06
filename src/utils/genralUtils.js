@@ -5,7 +5,6 @@ export const getIdFromUrl = (url) => {
 
 export const getOptionsAndFavorites = (state, fetchedCharacters) => {
   const { favorite, filters } = state;
-  console.log("---", filters);
   const options = {
     hair_color: new Set(filters.hair_color),
     skin_color: new Set(filters.skin_color),
@@ -28,14 +27,26 @@ export const getOptionsAndFavorites = (state, fetchedCharacters) => {
 };
 
 export const getFilteredCharacters = (characters, selectedFilters) => {
-  return characters.filter((character) => {
+  let filteredCharacters = characters.filter((character) => {
     return Object.entries(selectedFilters).every(
       ([filterKey, filterValues]) => {
-        return (
-          filterValues.length === 0 ||
-          filterValues.includes(character[filterKey])
-        );
+        if (filterKey !== "name") {
+          return (
+            filterValues.length === 0 ||
+            filterValues.includes(character[filterKey])
+          );
+        }
+        return true; // Allow all characters initially for the name filter
       }
     );
   });
+
+  if (selectedFilters["name"]) {
+    const searchTextLowerCase = selectedFilters["name"].toLowerCase();
+    filteredCharacters = filteredCharacters.filter((character) =>
+      character.name.toLowerCase().includes(searchTextLowerCase)
+    );
+  }
+
+  return filteredCharacters;
 };

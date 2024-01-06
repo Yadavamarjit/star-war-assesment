@@ -49,18 +49,26 @@ const characterSlice = createSlice({
       const { key, option } = action.payload;
 
       if (selectedFilters[key]) {
-        const index = selectedFilters[key].findIndex(
-          (filter) => filter === option
-        );
-        if (index > -1) {
-          selectedFilters[key] = selectedFilters[key].filter(
-            (filter) => filter !== option
+        if (key !== "name") {
+          const index = selectedFilters[key].findIndex(
+            (filter) => filter === option
           );
-        } else {
-          selectedFilters[key].push(option);
+          if (index > -1) {
+            selectedFilters[key] = selectedFilters[key].filter(
+              (filter) => filter !== option
+            );
+            if (selectedFilters[key].length == 0) delete selectedFilters[key];
+          } else {
+            selectedFilters[key].push(option);
+          }
+        } else if (key == "name") {
+          selectedFilters[key] = option;
+          if (selectedFilters[key].length == 0) delete selectedFilters[key];
         }
       } else {
-        selectedFilters[key] = [option];
+        if (key == "name") {
+          option.length && (selectedFilters[key] = option);
+        } else selectedFilters[key] = [option];
       }
       state.filteredCharacters = getFilteredCharacters(
         state.characters,

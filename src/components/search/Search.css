@@ -1,0 +1,16 @@
+.searchContainer {
+  border: 1px solid gray;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  padding: 10px;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.searchContainer input {
+  width: 90%;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+}
