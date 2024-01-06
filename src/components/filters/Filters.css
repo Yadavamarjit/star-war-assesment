@@ -11,3 +11,13 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.logo-container {
+  height: 40px;
+  width: 40px;
+}
+
+.logo-container img {
+  width: 100%;
+  color: white;
+}

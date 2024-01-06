@@ -30,13 +30,13 @@ export const getFilteredCharacters = (characters, selectedFilters) => {
   let filteredCharacters = characters.filter((character) => {
     return Object.entries(selectedFilters).every(
       ([filterKey, filterValues]) => {
-        if (filterKey !== "name") {
+        if (filterKey !== "name" && filterKey !== "sort") {
           return (
             filterValues.length === 0 ||
             filterValues.includes(character[filterKey])
           );
         }
-        return true; // Allow all characters initially for the name filter
+        return true;
       }
     );
   });
@@ -46,6 +46,16 @@ export const getFilteredCharacters = (characters, selectedFilters) => {
     filteredCharacters = filteredCharacters.filter((character) =>
       character.name.toLowerCase().includes(searchTextLowerCase)
     );
+  }
+
+  if (selectedFilters["sort"]) {
+    console.log("key", selectedFilters["sort"]);
+    const sortDirection = selectedFilters["sort"];
+    if (sortDirection === "ascending") {
+      filteredCharacters.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortDirection === "descending") {
+      filteredCharacters.sort((a, b) => b.name.localeCompare(a.name));
+    }
   }
 
   return filteredCharacters;

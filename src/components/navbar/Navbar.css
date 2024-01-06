@@ -5,6 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  background-color: #0e0e42;
+  color: white;
 }
 
 .navbar-container :nth-child(1) {

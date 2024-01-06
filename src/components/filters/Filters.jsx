@@ -1,7 +1,16 @@
-import { Checkbox, Grid, Typography } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import { pink } from "@mui/material/colors";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import acending from "../../assets/acending.svg";
+import decending from "../../assets/decending.svg";
 
 import "./Filters.css";
 import { filterCharacters } from "../../redux/reducers/characterReducer";
@@ -44,6 +53,46 @@ export default function Filters() {
               </Grid>
             );
           })}
+          <Grid>Sort</Grid>
+          <RadioGroup
+            onChange={(e) =>
+              handleFilterChanged({
+                key: "sort",
+                option: e.target.value,
+              })
+            }
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="radio-buttons-group"
+          >
+            <FormControlLabel
+              value="ascending"
+              control={
+                <Radio
+                  sx={{
+                    color: pink[800],
+                    "&.Mui-checked": {
+                      color: pink[600],
+                    },
+                  }}
+                />
+              }
+              label="A-Z"
+            />
+            <FormControlLabel
+              value="descending"
+              control={
+                <Radio
+                  sx={{
+                    color: pink[800],
+                    "&.Mui-checked": {
+                      color: pink[600],
+                    },
+                  }}
+                />
+              }
+              label="Z-A"
+            />
+          </RadioGroup>
         </Grid>
       )}
     </>

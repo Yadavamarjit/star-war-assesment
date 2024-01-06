@@ -47,9 +47,9 @@ const characterSlice = createSlice({
     filterCharacters: (state, action) => {
       const { selectedFilters } = state;
       const { key, option } = action.payload;
-
+      console.log({ key, option });
       if (selectedFilters[key]) {
-        if (key !== "name") {
+        if (key !== "name" && key !== "sort") {
           const index = selectedFilters[key].findIndex(
             (filter) => filter === option
           );
@@ -61,12 +61,12 @@ const characterSlice = createSlice({
           } else {
             selectedFilters[key].push(option);
           }
-        } else if (key == "name") {
+        } else if (key == "name" || key == "sort") {
           selectedFilters[key] = option;
           if (selectedFilters[key].length == 0) delete selectedFilters[key];
         }
       } else {
-        if (key == "name") {
+        if (key == "name" || key == "sort") {
           option.length && (selectedFilters[key] = option);
         } else selectedFilters[key] = [option];
       }
@@ -110,7 +110,7 @@ const characterSlice = createSlice({
 const persistConfig = {
   key: "characters",
   storage,
-  whitelist: ["favorite"], // Only persist the 'favorite' property
+  whitelist: ["favorite"], //Persisting favorite property
 };
 
 export const persistedCharacterReducer = persistReducer(
