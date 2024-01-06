@@ -14,85 +14,82 @@ import "./Filters.css";
 import { filterCharacters } from "../../redux/reducers/characterReducer";
 
 export default function Filters() {
-  const { filters, loading } = useSelector((state) => state.characters);
+  const { filters, loading, page } = useSelector((state) => state.characters);
   const dispatch = useDispatch();
   const handleFilterChanged = (payload) => {
     dispatch(filterCharacters(payload));
   };
+  console.log(!loading && page > 0, { loading, page });
 
   return (
-    <>
-      {!loading && (
-        <Grid className="filters-container">
-          {Object.keys(filters).map((key) => {
-            return (
-              <Grid key={key}>
-                <Typography variant="subtitle2">
-                  {key.toLocaleUpperCase().split("_")}
-                </Typography>
-                <Grid container className="checkbox-container">
-                  {Array.from(filters[key]).map((option) => (
-                    <Grid key={option}>
-                      <Checkbox
-                        sx={{
-                          color: pink[800],
-                          "&.Mui-checked": {
-                            color: pink[600],
-                          },
-                        }}
-                        onChange={() => handleFilterChanged({ key, option })}
-                      />
-                      <Typography variant="caption">
-                        {option.toLocaleUpperCase()}
-                      </Typography>
-                    </Grid>
-                  ))}
+    <Grid className="filters-container">
+      {Object.keys(filters).map((key) => {
+        return (
+          <Grid key={key}>
+            <Typography variant="subtitle2">
+              {key.toLocaleUpperCase().split("_")}
+            </Typography>
+            <Grid container className="checkbox-container">
+              {Array.from(filters[key]).map((option) => (
+                <Grid key={option}>
+                  <Checkbox
+                    sx={{
+                      color: pink[800],
+                      "&.Mui-checked": {
+                        color: pink[600],
+                      },
+                    }}
+                    onChange={() => handleFilterChanged({ key, option })}
+                  />
+                  <Typography variant="caption">
+                    {option.toLocaleUpperCase()}
+                  </Typography>
                 </Grid>
-              </Grid>
-            );
-          })}
-          <Grid>Sort</Grid>
-          <RadioGroup
-            onChange={(e) =>
-              handleFilterChanged({
-                key: "sort",
-                option: e.target.value,
-              })
-            }
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              value="ascending"
-              control={
-                <Radio
-                  sx={{
-                    color: pink[800],
-                    "&.Mui-checked": {
-                      color: pink[600],
-                    },
-                  }}
-                />
-              }
-              label="A-Z"
+              ))}
+            </Grid>
+          </Grid>
+        );
+      })}
+      <Grid>Sort</Grid>
+      <RadioGroup
+        onChange={(e) =>
+          handleFilterChanged({
+            key: "sort",
+            option: e.target.value,
+          })
+        }
+        aria-labelledby="demo-radio-buttons-group-label"
+        name="radio-buttons-group"
+      >
+        <FormControlLabel
+          value="ascending"
+          control={
+            <Radio
+              sx={{
+                color: pink[800],
+                "&.Mui-checked": {
+                  color: pink[600],
+                },
+              }}
             />
-            <FormControlLabel
-              value="descending"
-              control={
-                <Radio
-                  sx={{
-                    color: pink[800],
-                    "&.Mui-checked": {
-                      color: pink[600],
-                    },
-                  }}
-                />
-              }
-              label="Z-A"
+          }
+          label="A-Z"
+        />
+        <FormControlLabel
+          value="descending"
+          control={
+            <Radio
+              sx={{
+                color: pink[800],
+                "&.Mui-checked": {
+                  color: pink[600],
+                },
+              }}
             />
-          </RadioGroup>
-        </Grid>
-      )}
-    </>
+          }
+          label="Z-A"
+        />
+      </RadioGroup>
+    </Grid>
   );
 }

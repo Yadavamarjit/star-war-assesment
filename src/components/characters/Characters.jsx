@@ -4,13 +4,13 @@ import CharacterCard from "../cards/CharacterCard";
 import { fetchCharacters } from "../../redux/actions/characterAction";
 import "./Characters.css";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loader from "../Loader/Loader";
 
 export default function Characters() {
   const dispatch = useDispatch();
   const {
     characters: allCharacters,
     loading,
-    error,
     page,
     hasMore,
     filteredCharacters,
@@ -35,18 +35,25 @@ export default function Characters() {
 
   useEffect(() => {}, []);
   return (
-    <InfiniteScroll
-      dataLength={characters.length}
-      next={loadCharacters}
-      hasMore={hasMore}
-      loader={<h4>Loading ... </h4>}
-    >
+    <>
       {" "}
-      <div className="characters-container">
-        {characters.map((character, i) => (
-          <CharacterCard {...character} key={i} />
-        ))}
-      </div>
-    </InfiniteScroll>
+      {loading && page <= 0 ? (
+        <Loader />
+      ) : (
+        <InfiniteScroll
+          dataLength={characters.length}
+          next={loadCharacters}
+          hasMore={hasMore}
+          loader={<center>Fetching more characters ... </center>}
+        >
+          {" "}
+          <div className="characters-container">
+            {characters.map((character, i) => (
+              <CharacterCard {...character} key={i} />
+            ))}
+          </div>
+        </InfiniteScroll>
+      )}
+    </>
   );
 }

@@ -2,7 +2,6 @@
   border: 1px solid white;
   display: flex;
   align-items: center;
-  width: 40%;
   padding: 10px;
   justify-content: space-between;
   border-radius: 5px;
@@ -15,4 +14,15 @@
   font-size: 1.2rem;
   background-color: transparent;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .searchContainer {
+    margin-top: 10px;
+    border: 1px solid gray;
+  }
+  .searchContainer input {
+    color: black;
+    background-color: white;
+  }
 }

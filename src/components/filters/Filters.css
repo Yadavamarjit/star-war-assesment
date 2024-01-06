@@ -2,6 +2,7 @@
   background-color: #0e0e42;
   color: white;
   padding: 20px;
+  height: fit-content;
 }
 .checkbox-container input {
   color: white;
@@ -20,4 +21,10 @@
 .logo-container img {
   width: 100%;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .filters-container {
+    height: 100%;
+  }
 }

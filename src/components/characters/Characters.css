@@ -4,3 +4,13 @@
   gap: 15px;
   flex-wrap: wrap;
 }
+
+.loader-conainer {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .characters-container {
+    justify-content: center;
+  }
+}

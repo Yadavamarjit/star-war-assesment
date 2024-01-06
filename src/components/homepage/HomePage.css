@@ -3,3 +3,17 @@
   justify-content: space-evenly;
   padding-top: 20px;
 }
+
+.mobile-search-bar {
+  width: 100%;
+  padding: 10px;
+  display: none;
+}
+@media (max-width: 768px) {
+  .filters-container-lg {
+    display: none;
+  }
+  .mobile-search-bar {
+    display: block;
+  }
+}
