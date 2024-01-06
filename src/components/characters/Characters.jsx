@@ -4,7 +4,7 @@ import CharacterCard from "../cards/CharacterCard";
 import { fetchCharacters } from "../../redux/actions/characterAction";
 import "./Characters.css";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loader from "../Loader/Loader";
+import Loader from "../loader/Loader";
 
 export default function Characters() {
   const dispatch = useDispatch();
