@@ -32,13 +32,13 @@ export default function Characters() {
   useEffect(() => {
     const handleScroll = () => {
       const container = containerRef.current;
-
+      // if (loading) return;
       if (container) {
         const isEndReached =
           scrollDirection === "horizontal"
             ? container.scrollLeft + container.clientWidth >=
               container.scrollWidth
-            : window.innerHeight + document.documentElement.scrollTop >=
+            : window.innerHeight + window.scrollY >=
               document.documentElement.scrollHeight;
 
         if (hasMore && !loading && isEndReached) {
@@ -81,16 +81,16 @@ export default function Characters() {
           >
             <div>
               <FormControlLabel
-                value="horizontal"
-                control={<Radio />}
-                label="Horizontal"
-              />
-            </div>
-            <div>
-              <FormControlLabel
                 value="vertical"
                 control={<Radio />}
                 label="Vertical"
+              />
+            </div>{" "}
+            <div>
+              <FormControlLabel
+                value="horizontal"
+                control={<Radio />}
+                label="Horizontal"
               />
             </div>
           </RadioGroup>
