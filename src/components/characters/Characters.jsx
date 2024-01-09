@@ -60,7 +60,7 @@ export default function Characters() {
     if (page === 0) {
       dispatch(fetchCharacters(page + 1));
     }
-  }, [dispatch, page]);
+  }, [page]);
 
   const handleChangeScrollDirection = (e) => {
     setScrollDirection(e.target.value);
