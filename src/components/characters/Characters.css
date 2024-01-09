@@ -1,8 +1,21 @@
 .characters-container {
   display: flex;
+  white-space: nowrap;
+  padding: 20px;
+  gap: 20px;
+}
+
+.characters-container.horizontal {
+  overflow-x: auto;
+}
+
+.characters-container.vertical {
+  overflow-y: auto;
   align-items: center;
-  gap: 15px;
   flex-wrap: wrap;
+}
+.horizontal > .character-card-container {
+  flex: 0 0 auto;
 }
 
 .loader-conainer {
